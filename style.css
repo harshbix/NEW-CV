@@ -1,12 +1,14 @@
 :root {
-    /* Color Palette - Premium Corporate */
-    --primary-text: #222222;
-    --secondary-text: #555555;
-    --accent-color: #2c3e50; /* Dark Slate Blue - Professional */
-    --sidebar-bg: #f4f6f7;
-    --sidebar-text: #333333;
-    --border-line: #e0e0e0;
-    --white: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #666;
+    --accent-color: #2c3e50;
+    --accent-light: #e8ecef;
+    --sidebar-bg: #f7f9fa;
+    --border-color: #e1e4e8;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --spacing-unit: 1.2rem;
 }
 
 * {
@@ -16,85 +18,91 @@
 }
 
 body {
-    background: #e9e9e9; /* Background for viewing in browser */
-    font-family: 'Inter', sans-serif;
-    font-size: 10pt;
+    background: #525659; /* PDF Viewer Grey */
+    font-family: var(--font-body);
+    font-size: 9.5pt;
     line-height: 1.5;
-    color: var(--primary-text);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
 }
 
+/* Page Container - The "Paper" */
 .page-container {
-    background: var(--white);
+    background: white;
     width: 210mm;
-    min-height: 297mm; /* A4 Height */
     margin: 40px auto;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: row;
+    display: flex; /* Side by side layout */
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    overflow: hidden; /* Ensures distinct paper look */
+    position: relative;
+    min-height: 297mm;
 }
 
-/* Sidebar Styling */
+/* ==========================================================================
+   Sidebar (Left Column)
+   ========================================================================== */
 .sidebar {
-    width: 30%; /* Approx 63mm */
+    width: 32%;
     background-color: var(--sidebar-bg);
-    padding: 30px 20px;
-    border-right: 1px solid var(--border-line);
+    padding: 30px 20px; /* Compact padding */
+    border-right: 1px solid var(--border-color);
     flex-shrink: 0;
+    color: var(--text-secondary);
 }
 
 .profile-image-wrapper {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    overflow: hidden;
     margin: 0 auto 30px;
-    border: 4px solid var(--white);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background: #fff;
+    overflow: hidden;
+    position: relative;
 }
 
 .profile-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Keeps it filling the circle */
-    object-position: top center; /* Focuses on face usually */
-    transform: scale(0.85); /* Zooms out slighty to show more background/shoulders */
+    object-fit: cover;
+    object-position: top center;
+    transform: scale(0.95); /* Slight framing */
 }
 
 .sidebar-section {
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .sidebar-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 11pt;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     color: var(--accent-color);
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 5px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 8px;
     margin-bottom: 15px;
 }
 
-.contact-list, .skills-list {
+/* Contact List */
+.contact-list {
     list-style: none;
 }
 
 .contact-list li {
-    margin-bottom: 15px;
-    font-size: 9pt;
     display: flex;
-    gap: 10px;
-    line-height: 1.4;
-    word-break: break-word; /* Prevent overflow */
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 9pt;
+    color: var(--text-secondary);
 }
 
 .contact-list .icon {
-    opacity: 0.7;
-    flex-shrink: 0; /* Don't squash icon */
+    margin-right: 12px;
+    font-size: 1.1em;
+    color: var(--accent-color);
     width: 20px;
     text-align: center;
 }
@@ -102,225 +110,292 @@ body {
 .contact-list a {
     color: inherit;
     text-decoration: none;
-    border-bottom: 1px dotted #999;
+    border-bottom: 1px dotted transparent;
+    transition: border 0.2s;
 }
 
+/* Education blocks */
 .edu-block {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    position: relative;
+    padding-left: 12px;
+    border-left: 2px solid var(--border-color);
+    page-break-inside: avoid;
 }
 
 .edu-block .year {
-    font-size: 8pt;
-    font-weight: 700;
-    color: var(--accent-color);
     display: block;
+    font-size: 8pt;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 2px;
 }
 
 .edu-block .degree {
-    font-size: 9pt;
-    font-weight: 600;
     display: block;
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--text-primary);
     line-height: 1.3;
-    margin-bottom: 2px;
 }
 
 .edu-block .inst {
     font-size: 8.5pt;
-    color: var(--secondary-text);
-    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* Skills as Tags */
+.skills-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
 .skills-list li {
-    font-size: 9pt;
-    margin-bottom: 8px;
-    padding-left: 12px;
-    position: relative;
-    color: #444;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: var(--text-secondary);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 }
 
-.skills-list li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--accent-color);
-    font-weight: bold;
-}
-
-/* Main Content Styling */
+/* ==========================================================================
+   Main Content (Right Column)
+   ========================================================================== */
 .main-content {
-    flex: 1;
-    padding: 40px 40px 40px 30px;
+    width: 68%;
+    padding: 40px 35px; /* Compacted */
+    background: white;
 }
 
+/* Header */
 .resume-header {
-    margin-bottom: 40px;
-    border-bottom: 1px solid var(--border-line);
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 20px;
 }
 
 .name {
-    font-family: 'Playfair Display', serif;
-    font-size: 28pt;
-    font-weight: 400;
-    color: var(--accent-color);
-    line-height: 1.1;
-    margin-bottom: 5px;
+    font-family: var(--font-heading);
+    font-size: 30pt;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
 }
 
 .name .last-name {
-    font-weight: 700;
+    color: var(--accent-color);
 }
 
 .title {
-    font-size: 11pt;
+    font-family: var(--font-body);
+    font-size: 10pt;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--secondary-text);
+    letter-spacing: 2.5px;
     font-weight: 500;
+    color: var(--text-muted);
 }
 
+/* Sections */
 .section {
     margin-bottom: 30px;
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 16pt; /* Increased for better hierarchy */
-    font-weight: 700;
-    color: var(--primary-text);
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 8px;
-    letter-spacing: -0.5px;
+    font-family: var(--font-heading);
+    font-size: 15pt;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
 }
 
 .section-title::after {
     content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px; /* Slightly wider underscore */
-    height: 3px;
-    background-color: var(--accent-color);
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border-color);
+    margin-left: 20px;
 }
 
 .summary-text {
-    font-size: 10pt;
-    color: var(--secondary-text);
+    color: var(--text-secondary);
     text-align: justify;
-    line-height: 1.7;
+    line-height: 1.6;
+    font-size: 9.5pt;
 }
 
+/* Job Experience - Timeline Vertical Line */
 .job {
-    margin-bottom: 25px;
-    page-break-inside: avoid; /* Keep job blocks together */
+    margin-bottom: 22px;
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent-light);
+    page-break-inside: avoid; /* Essential for keeping blocks intract */
+}
+
+.job:last-child {
+    border-left-color: transparent;
+    border-left: 2px solid var(--accent-light);
+}
+
+/* Bullet on the timeline */
+.job::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--accent-color);
 }
 
 .job-header {
+    margin-bottom: 6px;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 6px;
 }
 
 .job-role {
+    font-size: 10.5pt;
     font-weight: 700;
-    font-size: 11pt;
-    color: var(--primary-text);
-    width: 100%;
+    color: var(--text-primary);
+    margin-right: 10px;
 }
 
 .job-company {
-    font-weight: 500;
-    font-size: 10pt;
+    font-size: 9.5pt;
     color: var(--accent-color);
+    font-weight: 600;
+    margin-right: auto;
 }
 
 .job-date {
     font-size: 9pt;
-    color: #888;
+    color: var(--text-muted);
     font-style: italic;
+    white-space: nowrap;
 }
 
 .job-duties {
-    margin-left: 18px;
-    list-style-type: square;
+    margin-top: 6px;
+    list-style: none;
+    padding: 0;
 }
 
 .job-duties li {
-    font-size: 9.5pt;
-    color: var(--secondary-text);
+    position: relative;
+    padding-left: 15px;
     margin-bottom: 4px;
-    line-height: 1.5;
+    font-size: 9.5pt;
+    color: var(--text-secondary);
+    line-height: 1.45;
 }
 
-/* Print Configuration */
+.job-duties li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+}
+
+/* Simple List (Leadership) */
+.simple-list {
+    list-style: none;
+}
+
+.simple-list li {
+    margin-bottom: 8px;
+    padding-left: 18px;
+    position: relative;
+    font-size: 9.5pt;
+    color: var(--text-secondary);
+}
+
+.simple-list li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+
+/* ==========================================================================
+   Print Configuration
+   ========================================================================== */
 @media print {
-    @page { 
-        size: A4; 
-        margin: 0; 
+    @page {
+        size: A4;
+        margin: 0mm; /* Maximizing space as requested */
     }
 
     body {
         margin: 0;
         padding: 0;
         background: white;
-    }
-
-    .page-container {
-        width: 100%;
-        margin: 0;
-        box-shadow: none;
-        min-height: auto;
-    }
-
-    .sidebar {
-        background-color: #f4f6f7 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
 
-    .main-content {
-        padding-top: 30px;
-    }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-}
-
-/* Mobile Responsiveness */
-@media screen and (max-width: 768px) {
     .page-container {
-        flex-direction: column;
+        display: block;
         width: 100%;
+        margin: 0;
+        box-shadow: none;
+        overflow: visible;
+        border: none;
     }
 
+    /* Floats for printing */
     .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--border-line);
-        text-align: center;
+        float: left;
+        width: 32%;
+        /* Infinite background hack handled by container */
+        min-height: 100vh;
+        background-color: var(--sidebar-bg) !important;
+        padding-top: 25px; /* Add some visual padding at top of page */
     }
 
-    .profile-image-wrapper {
-        margin: 0 auto 20px;
+    .main-content {
+        float: right;
+        width: 68%;
+        min-height: 100vh;
+        background-color: white !important;
+        padding-top: 25px; /* Add some visual padding at top of page */
     }
 
-    .contact-list li {
-        justify-content: center;
-        text-align: center;
+    /* Clearfix */
+    .page-container::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Page Breaks */
+    .section {
+        page-break-inside: auto;
+    }
+
+    .job, .edu-block, .profile-image-wrapper, .sidebar-section, h1, h2, h3 {
+        page-break-inside: avoid;
+    }
+
+    /* Adjust typography for print reading */
+    body {
+        font-size: 9pt; /* Slightly smaller for print to fit more */
     }
     
-    .skills-list li {
-        padding-left: 0;
-        list-style-position: inside;
-        text-align: center;
-    }
-    
-    .job-header {
-        flex-direction: column;
-    }
+    .name { font-size: 26pt; }
 }
