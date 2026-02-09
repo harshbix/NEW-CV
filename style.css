@@ -1,14 +1,13 @@
 :root {
     --text-primary: #1a1a1a;
-    --text-secondary: #4a4a4a;
+    --text-secondary: #404040;
     --text-muted: #666;
-    --accent-color: #2c3e50;
+    --accent-color: #2c3e50; /* Deep Slate Blue */
     --accent-light: #e8ecef;
-    --sidebar-bg: #f7f9fa;
+    --sidebar-bg: #f4f6f8;
     --border-color: #e1e4e8;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
-    --spacing-unit: 1.2rem;
 }
 
 * {
@@ -18,7 +17,7 @@
 }
 
 body {
-    background: #525659; /* PDF Viewer Grey */
+    background: #525659;
     font-family: var(--font-body);
     font-size: 9.5pt;
     line-height: 1.5;
@@ -31,11 +30,11 @@ body {
     background: white;
     width: 210mm;
     margin: 40px auto;
-    display: flex; /* Side by side layout */
+    display: flex;
     box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    overflow: hidden; /* Ensures distinct paper look */
-    position: relative;
     min-height: 297mm;
+    /* Continuous Sidebar Background Effect */
+    background: linear-gradient(to right, var(--sidebar-bg) 32%, white 32%);
 }
 
 /* ==========================================================================
@@ -43,23 +42,23 @@ body {
    ========================================================================== */
 .sidebar {
     width: 32%;
-    background-color: var(--sidebar-bg);
-    padding: 30px 20px; /* Compact padding */
-    border-right: 1px solid var(--border-color);
+    /* Background handled by container for print consistency */
+    padding: 30px 20px;
     flex-shrink: 0;
     color: var(--text-secondary);
 }
 
 .profile-image-wrapper {
-    width: 130px;
-    height: 130px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
-    margin: 0 auto 30px;
-    border: 3px solid white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin: 0 auto 25px;
+    border: 4px solid white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     background: #fff;
     overflow: hidden;
     position: relative;
+    z-index: 10;
 }
 
 .profile-img {
@@ -67,21 +66,22 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    transform: scale(0.95); /* Slight framing */
+    transform: scale(1.0); /* Full fit */
 }
 
 .sidebar-section {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
+    page-break-inside: avoid;
 }
 
 .sidebar-title {
     font-family: var(--font-heading);
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     color: var(--accent-color);
-    border-bottom: 2px solid var(--accent-color);
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 8px;
     margin-bottom: 15px;
 }
@@ -94,7 +94,7 @@ body {
 .contact-list li {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-size: 9pt;
     color: var(--text-secondary);
 }
@@ -110,22 +110,19 @@ body {
 .contact-list a {
     color: inherit;
     text-decoration: none;
-    border-bottom: 1px dotted transparent;
-    transition: border 0.2s;
 }
 
 /* Education blocks */
 .edu-block {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     position: relative;
-    padding-left: 12px;
+    padding-left: 14px;
     border-left: 2px solid var(--border-color);
-    page-break-inside: avoid;
 }
 
 .edu-block .year {
     display: block;
-    font-size: 8pt;
+    font-size: 8.5pt;
     font-weight: 600;
     color: var(--accent-color);
     margin-bottom: 2px;
@@ -133,34 +130,33 @@ body {
 
 .edu-block .degree {
     display: block;
-    font-size: 9pt;
+    font-size: 9.5pt;
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.3;
 }
 
 .edu-block .inst {
-    font-size: 8.5pt;
+    font-size: 9pt;
     color: var(--text-muted);
 }
 
-/* Skills as Tags */
+/* Skills Tags */
 .skills-list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
 }
 
 .skills-list li {
     background: white;
-    border: 1px solid var(--border-color);
+    border: 1px solid #d1d9e0;
     border-radius: 4px;
-    padding: 3px 8px;
+    padding: 4px 10px;
     font-size: 8.5pt;
     font-weight: 500;
     color: var(--text-secondary);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 }
 
 /* ==========================================================================
@@ -168,23 +164,22 @@ body {
    ========================================================================== */
 .main-content {
     width: 68%;
-    padding: 40px 35px; /* Compacted */
-    background: white;
+    padding: 35px;
 }
 
 /* Header */
 .resume-header {
-    margin-bottom: 30px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 20px;
+    margin-bottom: 35px;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 25px;
 }
 
 .name {
     font-family: var(--font-heading);
-    font-size: 30pt;
+    font-size: 32pt;
     font-weight: 700;
     color: var(--text-primary);
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 8px;
     letter-spacing: -0.5px;
 }
@@ -195,25 +190,26 @@ body {
 
 .title {
     font-family: var(--font-body);
-    font-size: 10pt;
+    font-size: 10.5pt;
     text-transform: uppercase;
-    letter-spacing: 2.5px;
+    letter-spacing: 2px;
     font-weight: 500;
     color: var(--text-muted);
 }
 
 /* Sections */
 .section {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .section-title {
     font-family: var(--font-heading);
-    font-size: 15pt;
-    color: var(--text-primary);
-    margin-bottom: 18px;
+    font-size: 16pt;
+    color: var(--accent-color);
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
+    font-weight: 700;
 }
 
 .section-title::after {
@@ -221,103 +217,104 @@ body {
     flex-grow: 1;
     height: 1px;
     background: var(--border-color);
-    margin-left: 20px;
+    margin-left: 15px;
 }
 
 .summary-text {
     color: var(--text-secondary);
     text-align: justify;
-    line-height: 1.6;
-    font-size: 9.5pt;
+    line-height: 1.7;
+    font-size: 10pt;
 }
 
-/* Job Experience - Timeline Vertical Line */
+/* Job Experience - Professional Timeline */
 .job {
-    margin-bottom: 22px;
+    margin-bottom: 28px;
     position: relative;
-    padding-left: 20px;
+    padding-left: 24px;
+    /* Continuous line trick using border on container? No, individual is safer for breaks */
     border-left: 2px solid var(--accent-light);
-    page-break-inside: avoid; /* Essential for keeping blocks intract */
 }
 
 .job:last-child {
-    border-left-color: transparent;
-    border-left: 2px solid var(--accent-light);
+    border-left-color: transparent; /* Stop line for last item */
+    border-left: 2px solid var(--accent-light); /* Actually keep it if we want visual continuity, but usually stop */
 }
 
-/* Bullet on the timeline */
+/* Timeline Dot */
 .job::before {
     content: "";
     position: absolute;
-    left: -6px;
+    left: -7px;
     top: 6px;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: var(--white);
-    border: 2px solid var(--accent-color);
+    background: white;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 0 3px white; /* Gap effect */
 }
 
 .job-header {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .job-role {
-    font-size: 10.5pt;
+    font-size: 11pt;
     font-weight: 700;
     color: var(--text-primary);
-    margin-right: 10px;
+    width: 100%; /* Force Title on own line for cleaner look */
+    margin-bottom: 2px;
 }
 
 .job-company {
-    font-size: 9.5pt;
+    font-size: 10pt;
     color: var(--accent-color);
     font-weight: 600;
-    margin-right: auto;
 }
 
 .job-date {
-    font-size: 9pt;
+    font-size: 9.5pt;
     color: var(--text-muted);
-    font-style: italic;
-    white-space: nowrap;
+    font-weight: 500;
+    background: #f4f6f8;
+    padding: 2px 8px;
+    border-radius: 4px;
 }
 
 .job-duties {
-    margin-top: 6px;
+    margin-top: 8px;
     list-style: none;
     padding: 0;
 }
 
 .job-duties li {
     position: relative;
-    padding-left: 15px;
-    margin-bottom: 4px;
-    font-size: 9.5pt;
+    padding-left: 18px;
+    margin-bottom: 5px;
+    font-size: 9.8pt;
     color: var(--text-secondary);
-    line-height: 1.45;
+    line-height: 1.5;
 }
 
 .job-duties li::before {
-    content: "–";
+    content: "•";
     position: absolute;
     left: 0;
-    color: var(--text-muted);
+    color: var(--accent-color);
+    font-weight: bold;
 }
 
-/* Simple List (Leadership) */
-.simple-list {
-    list-style: none;
-}
-
+/* Leadership Styles */
 .simple-list li {
-    margin-bottom: 8px;
-    padding-left: 18px;
+    margin-bottom: 10px;
+    padding-left: 20px;
     position: relative;
-    font-size: 9.5pt;
+    font-size: 10pt;
     color: var(--text-secondary);
 }
 
@@ -327,8 +324,9 @@ body {
     left: 0;
     color: var(--accent-color);
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.4em;
     line-height: 1;
+    top: -2px;
 }
 
 
@@ -338,7 +336,7 @@ body {
 @media print {
     @page {
         size: A4;
-        margin: 0mm; /* Maximizing space as requested */
+        margin: 10mm 0mm; /* 10mm top/bottom, 0 sides */
     }
 
     body {
@@ -354,48 +352,43 @@ body {
         width: 100%;
         margin: 0;
         box-shadow: none;
-        overflow: visible;
         border: none;
+        /* The Gradient background simulates the sidebar column across ALL pages */
+        background: linear-gradient(to right, var(--sidebar-bg) 32%, white 32%) !important;
     }
 
-    /* Floats for printing */
     .sidebar {
         float: left;
         width: 32%;
-        /* Infinite background hack handled by container */
-        min-height: 100vh;
-        background-color: var(--sidebar-bg) !important;
-        padding-top: 25px; /* Add some visual padding at top of page */
+        margin: 0;
+        background: transparent; /* Use container background */
     }
 
     .main-content {
         float: right;
         width: 68%;
-        min-height: 100vh;
-        background-color: white !important;
-        padding-top: 25px; /* Add some visual padding at top of page */
+        margin: 0;
+        background: transparent;
     }
 
-    /* Clearfix */
-    .page-container::after {
+    /* Page Break Logic - The "Intelligence" Part */
+    h1, h2, h3, h4, .profile-image-wrapper {
+        page-break-after: avoid;
+    }
+    
+    .job, .edu-block, .sidebar-section {
+        page-break-inside: avoid;
+    }
+
+    .section {
+        /* Allow sections to break, but avoid orphans */
+        page-break-inside: auto;
+    }
+
+    /* Clearfix at end of document if needed */
+    .section:last-child, .main-content::after {
         content: "";
         display: table;
         clear: both;
     }
-
-    /* Page Breaks */
-    .section {
-        page-break-inside: auto;
-    }
-
-    .job, .edu-block, .profile-image-wrapper, .sidebar-section, h1, h2, h3 {
-        page-break-inside: avoid;
-    }
-
-    /* Adjust typography for print reading */
-    body {
-        font-size: 9pt; /* Slightly smaller for print to fit more */
-    }
-    
-    .name { font-size: 26pt; }
 }

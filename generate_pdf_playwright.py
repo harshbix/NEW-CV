@@ -14,12 +14,12 @@ def generate_pdf():
         page.wait_for_load_state('networkidle')
         
         # Generate PDF
-        # Maximizing printable area (no margin)
+        # Using 10mm vertical margins (approx 2.5%) as requested
         page.pdf(
             path="Anna_Margareth_Njau_Resume.pdf",
             format="A4",
             print_background=True,
-            margin={"top": "0mm", "bottom": "0mm", "left": "0mm", "right": "0mm"}
+            margin={"top": "10mm", "bottom": "10mm", "left": "0mm", "right": "0mm"}
         )
         
         browser.close()
